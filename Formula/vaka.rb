@@ -1,24 +1,22 @@
 class Vaka < Formula
   desc "Declarative egress firewall for Docker containers"
   homepage "https://github.com/infrasecture/vaka"
-  url "https://github.com/infrasecture/vaka.git",
-      using: :git,
-      revision: "c08add125d252ccaba133d755070c36ce0381b8b"
-  version "0.0.0"
+  version "0.0.1"
   license "LGPL-2.1-only"
 
-  depends_on "go" => :build
+  on_arm do
+    url "https://github.com/infrasecture/vaka/releases/download/v0.0.1/vaka-brew-darwin-arm64.tar.gz"
+    sha256 "c78f18d284d13a1b80235cfe6180c3255d6abd7c2d13ebe07ea5375ea258608d"
+  end
+
+  on_intel do
+    url "https://github.com/infrasecture/vaka/releases/download/v0.0.1/vaka-brew-darwin-amd64.tar.gz"
+    sha256 "4c2ae2c3b5426b4a2b2b05ed11fc0c334e40c030ddb3cf341d77ff30cda24bb4"
+  end
 
   def install
-    commit = Utils.safe_popen_read("git", "rev-parse", "--short", "HEAD").strip
-    ldflags = %W[
-      -s
-      -w
-      -X
-      main.version=#{commit}
-    ]
-
-    system "go", "build", *std_go_args(ldflags:), "./cmd/vaka"
+    bin.install "vaka"
+    bin.install "vaka-init"
   end
 
   test do
