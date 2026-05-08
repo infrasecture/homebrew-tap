@@ -6,13 +6,14 @@ Homebrew tap for Infrasecture CLI tools.
 
 ```bash
 brew tap infrasecture/tap
-brew install infrasecture/tap/vaka
+brew install vaka
+
+# or track nightly builds
+brew install vaka-nightly
 ```
 
 ## Notes
 
 - This tap is packaging-only. Report bugs and feature requests in the main repo:
   https://github.com/infrasecture/vaka/issues
-- The current `vaka` formula builds from source from a pinned upstream commit.
-  Once versioned upstream tags/releases are available, switch the formula to
-  release tarballs and checksums.
+- The formulas install release bundles published by the main vaka repository.
