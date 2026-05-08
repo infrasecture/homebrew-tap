@@ -1,17 +1,17 @@
 class VakaNightly < Formula
   desc "Declarative egress firewall for Docker containers (nightly)"
   homepage "https://github.com/infrasecture/vaka"
-  version "0.0.0-nightly.202604262201.5f6b1f19ef86"
+  version "0.0.0-nightly.202605081655.6813c4a0ea0a"
   license "LGPL-2.1-only"
 
   on_arm do
-    url "https://github.com/infrasecture/vaka/releases/download/5f6b1f19ef86/vaka-brew-darwin-arm64.tar.gz"
-    sha256 "636430b74acd2083ab84216ebbad252cb6b6c4f4900cd21532ff1c9c0901b3cc"
+    url "https://github.com/infrasecture/vaka/releases/download/6813c4a0ea0a/vaka-brew-darwin-arm64.tar.gz"
+    sha256 "14a93bcb2fe7cfd2c9ef8af936bdd12bf27f08950fefecb1d51e5904cf22711e"
   end
 
   on_intel do
-    url "https://github.com/infrasecture/vaka/releases/download/5f6b1f19ef86/vaka-brew-darwin-amd64.tar.gz"
-    sha256 "2d3fa5ee394de88bcaf7743f7f9767b3a927a6daa61be156bea247360da91138"
+    url "https://github.com/infrasecture/vaka/releases/download/6813c4a0ea0a/vaka-brew-darwin-amd64.tar.gz"
+    sha256 "dce650cebe754471a49ddfee30a43a8aa36dd121432a2906340541f622b73109"
   end
 
   def install
