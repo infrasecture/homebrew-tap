@@ -1,38 +1,22 @@
 class Vaka < Formula
   desc "Declarative egress firewall for Docker containers"
   homepage "https://github.com/infrasecture/vaka"
-  version "0.0.2"
+  version "0.1.0"
   license "LGPL-2.1-only"
 
-  conflicts_with "vaka-nightly", because: "vaka and vaka-nightly install the same commands: vaka and vaka-init"
-
   on_arm do
-    url "https://github.com/infrasecture/vaka/releases/download/v0.0.2/vaka-brew-darwin-arm64.tar.gz"
-    sha256 "d91cd2f7bd9ee893e675a2db1dcf2b8c1892079a5ac4d53b7b1c8528471ed878"
+    url "https://github.com/infrasecture/vaka/releases/download/v0.1.0/vaka-brew-darwin-arm64.tar.gz"
+    sha256 "c1f9fd79a225b522960d009f7369d1c7da4b6443468787aa16cf7f2154db099e"
   end
 
   on_intel do
-    url "https://github.com/infrasecture/vaka/releases/download/v0.0.2/vaka-brew-darwin-amd64.tar.gz"
-    sha256 "dfa3e72e5c19d689ba14a1e307d7c233b12c0de8e2485cac96f95cfced0d1b8f"
+    url "https://github.com/infrasecture/vaka/releases/download/v0.1.0/vaka-brew-darwin-amd64.tar.gz"
+    sha256 "37739066ff371bae8f77369c64c87e6fbf79ff8b570234d329ef70161b649862"
   end
 
   def install
     bin.install "vaka"
     bin.install "vaka-init"
-  end
-
-  def caveats
-    <<~EOS
-      vaka and vaka-nightly install the same commands: vaka and vaka-init.
-      Only one channel should be linked at a time.
-
-      To switch from nightly to stable:
-        brew unlink vaka-nightly
-        brew install vaka
-
-      If stable is already installed but unlinked:
-        brew link vaka
-    EOS
   end
 
   test do
