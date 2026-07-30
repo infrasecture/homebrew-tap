@@ -1,17 +1,17 @@
 class Vaka < Formula
   desc "Declarative egress firewall for Docker containers"
   homepage "https://github.com/infrasecture/vaka"
-  version "0.1.1"
+  version "0.1.2"
   license "LGPL-2.1-only"
 
   on_arm do
-    url "https://github.com/infrasecture/vaka/releases/download/v0.1.1/vaka-brew-darwin-arm64.tar.gz"
-    sha256 "14eb3fe99f9a4a649d0714396df67143c00c008b51605d6b61c21aa276f8cd28"
+    url "https://github.com/infrasecture/vaka/releases/download/v0.1.2/vaka-brew-darwin-arm64.tar.gz"
+    sha256 "042ef8b8c10f0c3c9e205fa242458c48029d9a8794d93aad5cfc33c4f9cfada9"
   end
 
   on_intel do
-    url "https://github.com/infrasecture/vaka/releases/download/v0.1.1/vaka-brew-darwin-amd64.tar.gz"
-    sha256 "6540a765334689f1a283bff2dd9e772a74708415be56d5671974271951c09fbf"
+    url "https://github.com/infrasecture/vaka/releases/download/v0.1.2/vaka-brew-darwin-amd64.tar.gz"
+    sha256 "523b785a18346470f25879c9c18366c516707a5fa9d725129bbdbbc9bcc48a64"
   end
 
   def install
