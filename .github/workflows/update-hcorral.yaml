@@ -1,0 +1,50 @@
+name: Update hcorral formula
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Published hcorral version (vMAJOR.MINOR.PATCH)
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-hcorral
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: main
+      - name: Resolve the published source
+        id: source
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ inputs.version }}
+        run: |
+          [[ "$VERSION" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]
+          gh api "repos/infrasecture/hcorral/releases/tags/$VERSION" --jq 'select(.draft == false) | .id' | grep -Eq '^[0-9]+$'
+          tag="$(gh api "repos/infrasecture/hcorral/git/ref/tags/$VERSION" --jq 'select(.object.type == "tag") | .object.sha')"
+          [[ "$tag" =~ ^[0-9a-f]{40}$ ]]
+          commit="$(gh api "repos/infrasecture/hcorral/git/tags/$tag" --jq 'select(.object.type == "commit") | .object.sha')"
+          [[ "$commit" =~ ^[0-9a-f]{40}$ ]]
+          printf 'commit=%s\n' "$commit" >>"$GITHUB_OUTPUT"
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: infrasecture/hcorral
+          ref: ${{ steps.source.outputs.commit }}
+          path: release-source
+          persist-credentials: false
+      - name: Verify archives and publish the formula
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ inputs.version }}
+          SOURCE_COMMIT: ${{ steps.source.outputs.commit }}
+        run: ./scripts/update-hcorral.sh
